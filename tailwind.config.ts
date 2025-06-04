@@ -64,7 +64,7 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				},
 				'agri': {
-					'green': '#2d5016',
+					'green': '#c41e3a',
 					'red': '#c41e3a',
 					'brown': '#8b4513',
 					'cream': '#f5f5dc',
