@@ -17,25 +17,31 @@ const Navigation = () => {
   const isActive = (href: string) => location.pathname === href;
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white shadow-lg sticky top-0 z-50 border-b-2 border-agri-red">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <Tractor className="h-8 w-8 text-agri-red" />
-            <span className="text-xl font-bold text-agri-green">VOF van Bladel</span>
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="relative">
+              <Tractor className="h-10 w-10 text-agri-red" />
+              <div className="absolute -top-1 -right-1 w-3 h-3 bg-agri-green rounded-full"></div>
+            </div>
+            <div>
+              <span className="text-2xl font-bold text-agri-green">VOF van Bladel</span>
+              <div className="text-xs text-gray-600 font-medium">Sinds 1983</div>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-1">
             {navigation.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                className={`px-6 py-3 text-lg font-semibold rounded-lg transition-all duration-200 ${
                   isActive(item.href)
-                    ? 'text-agri-red border-b-2 border-agri-red'
-                    : 'text-agri-green hover:text-agri-red hover:border-b-2 hover:border-agri-red'
+                    ? 'text-white bg-agri-red shadow-lg'
+                    : 'text-agri-green hover:text-agri-red hover:bg-gray-50'
                 }`}
               >
                 {item.name}
@@ -47,26 +53,26 @@ const Navigation = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-agri-green hover:text-agri-red hover:bg-gray-100 transition-colors duration-200"
+              className="p-3 rounded-lg text-agri-green hover:text-agri-red hover:bg-gray-50 transition-colors duration-200"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
             </button>
           </div>
         </div>
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-50">
+          <div className="md:hidden border-t border-gray-200">
+            <div className="px-2 pt-4 pb-6 space-y-2 bg-gray-50">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-3 py-2 text-base font-medium transition-colors duration-200 ${
+                  className={`block px-4 py-3 text-lg font-semibold rounded-lg transition-colors duration-200 ${
                     isActive(item.href)
-                      ? 'text-agri-red bg-white rounded-md'
-                      : 'text-agri-green hover:text-agri-red hover:bg-white rounded-md'
+                      ? 'text-white bg-agri-red'
+                      : 'text-agri-green hover:text-agri-red hover:bg-white'
                   }`}
                 >
                   {item.name}

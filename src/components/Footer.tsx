@@ -1,67 +1,118 @@
 
-import { MapPin, Phone, Mail, Clock, Tractor } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Tractor, Award, Shield } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <footer className="bg-agri-green text-white">
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
-          <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center space-x-2 mb-4">
-              <Tractor className="h-8 w-8 text-agri-red" />
-              <span className="text-xl font-bold">VOF van Bladel</span>
+          <div className="lg:col-span-2">
+            <div className="flex items-center space-x-3 mb-6">
+              <div className="relative">
+                <Tractor className="h-10 w-10 text-agri-red" />
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full"></div>
+              </div>
+              <div>
+                <span className="text-2xl font-bold">VOF van Bladel</span>
+                <div className="text-sm text-gray-300">Sinds 1983</div>
+              </div>
             </div>
-            <p className="text-gray-300 mb-4">
-              Sinds 1983 uw betrouwbare partner voor tractoren, landbouwmachines en onderhoud. 
-              Gevestigd in Herpt, werkend voor de hele regio.
+            <p className="text-gray-300 mb-6 text-lg leading-relaxed">
+              Al meer dan 40 jaar uw betrouwbare partner voor tractoren, landbouwmachines 
+              en professioneel onderhoud. Gevestigd in Herpt, werkend voor de hele regio.
             </p>
-            <p className="text-gray-300">
-              Familiebedrijf met jarenlange ervaring in de agrarische sector.
+            
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="flex items-center space-x-2">
+                <Award className="h-5 w-5 text-agri-red" />
+                <span className="text-sm">Erkend dealer 12+ merken</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Shield className="h-5 w-5 text-agri-red" />
+                <span className="text-sm">APK-keuring erkend</span>
+              </div>
+            </div>
+
+            <p className="text-gray-300 font-semibold">
+              Familiebedrijf met traditie en vakmanschap
             </p>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <div className="space-y-3">
-              <div className="flex items-center space-x-2">
-                <MapPin className="h-4 w-4 text-agri-red" />
-                <span className="text-sm text-gray-300">Bernsestraat 13, Herpt</span>
+            <h3 className="text-xl font-bold mb-6 text-agri-red">Contact</h3>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <MapPin className="h-5 w-5 text-agri-red mt-1 flex-shrink-0" />
+                <div>
+                  <div className="font-semibold">Bernsestraat 13</div>
+                  <div className="text-gray-300">5253 AB Herpt</div>
+                  <div className="text-gray-300">Nederland</div>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-agri-red" />
-                <span className="text-sm text-gray-300">Telefoon beschikbaar</span>
+              <div className="flex items-center space-x-3">
+                <Phone className="h-5 w-5 text-agri-red" />
+                <div>
+                  <div className="font-semibold">Telefoon</div>
+                  <div className="text-gray-300 text-sm">Nummer beschikbaar via contact</div>
+                </div>
               </div>
-              <div className="flex items-center space-x-2">
-                <Mail className="h-4 w-4 text-agri-red" />
-                <span className="text-sm text-gray-300">info@vofvanbladel.nl</span>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-agri-red" />
+                <div>
+                  <div className="font-semibold">Email</div>
+                  <div className="text-gray-300 text-sm">info@vofvanbladel.nl</div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Opening Hours */}
+          {/* Quick Links & Hours */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Openingstijden</h3>
-            <div className="space-y-2">
-              <div className="flex items-center space-x-2">
-                <Clock className="h-4 w-4 text-agri-red" />
-                <span className="text-sm text-gray-300">Ma-Vr: 7:30-17:00</span>
+            <h3 className="text-xl font-bold mb-6 text-agri-red">Informatie</h3>
+            
+            <div className="mb-6">
+              <div className="flex items-center space-x-3 mb-3">
+                <Clock className="h-5 w-5 text-agri-red" />
+                <span className="font-semibold">Openingstijden</span>
               </div>
-              <p className="text-sm text-gray-300">Za: Op afspraak</p>
-              <p className="text-sm text-gray-300">Spoed: 24/7 bereikbaar</p>
+              <div className="text-gray-300 text-sm space-y-1 ml-8">
+                <div>Ma-Vr: 7:30 - 17:00</div>
+                <div>Zaterdag: Op afspraak</div>
+                <div>Zondag: Gesloten</div>
+                <div className="text-agri-red font-semibold mt-2">Spoed: 24/7 bereikbaar</div>
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Link to="/diensten" className="block text-gray-300 hover:text-white transition-colors duration-200">
+                → Onze diensten
+              </Link>
+              <Link to="/merken" className="block text-gray-300 hover:text-white transition-colors duration-200">
+                → Erkende merken
+              </Link>
+              <Link to="/contact" className="block text-gray-300 hover:text-white transition-colors duration-200">
+                → Contact opnemen
+              </Link>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-600 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-gray-300">
-              © 2024 VOF van Bladel. Alle rechten voorbehouden.
-            </p>
-            <p className="text-sm text-gray-300 mt-2 md:mt-0">
-              Sinds 1983 • Erkend dealer • APK-keuringen
-            </p>
+        <div className="border-t border-gray-600 mt-12 pt-8">
+          <div className="flex flex-col lg:flex-row justify-between items-center space-y-4 lg:space-y-0">
+            <div className="text-center lg:text-left">
+              <p className="text-gray-300">
+                © 2024 VOF van Bladel. Alle rechten voorbehouden.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center lg:justify-end gap-4 text-sm text-gray-300">
+              <span className="bg-agri-red px-3 py-1 rounded-full text-white font-semibold">Sinds 1983</span>
+              <span>Erkend dealer</span>
+              <span>APK-keuringen</span>
+              <span>24/7 service</span>
+            </div>
           </div>
         </div>
       </div>
