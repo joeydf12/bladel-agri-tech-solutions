@@ -11,6 +11,7 @@ const Navigation = () => {
     { name: 'Home', href: '/' },
     { name: 'Diensten', href: '/diensten' },
     { name: 'Merken', href: '/merken' },
+    { name: 'Tractoren te koop', href: '/tractoren-te-koop' },
     { name: 'Contact', href: '/contact' },
   ];
 
