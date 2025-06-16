@@ -3,80 +3,87 @@ import Layout from '@/components/Layout';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, Calendar, MapPin, Wrench } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+
+interface Tractor {
+  id: string;
+  title: string;
+  brand: string;
+  model: string;
+  year: number;
+  hours: number;
+  price: number;
+  location: string;
+  description: string | null;
+  image_url: string | null;
+  marktplaats_url: string | null;
+  is_featured: boolean;
+  is_available: boolean;
+}
 
 const TractorenTeKoop = () => {
-  const tractors = [
-    {
-      id: 1,
-      title: "John Deere 6420",
-      year: 2005,
-      hours: 8500,
-      price: "€ 35.000",
-      location: "Herpt",
-      description: "Zeer nette tractor met frontlader, airco en GPS",
-      image: "/placeholder.svg",
-      marktplaatsUrl: "https://www.marktplaats.nl"
-    },
-    {
-      id: 2,
-      title: "Case IH Puma 165",
-      year: 2018,
-      hours: 3200,
-      price: "€ 89.500",
-      location: "Herpt",
-      description: "Top tractor met CVT transmissie en zeer weinig uren",
-      image: "/placeholder.svg",
-      marktplaatsUrl: "https://www.marktplaats.nl"
-    },
-    {
-      id: 3,
-      title: "New Holland T7.270",
-      year: 2016,
-      hours: 4800,
-      price: "€ 75.000",
-      location: "Herpt",
-      description: "Krachtige tractor met PowerShift transmissie",
-      image: "/placeholder.svg",
-      marktplaatsUrl: "https://www.marktplaats.nl"
-    },
-    {
-      id: 4,
-      title: "Massey Ferguson 7720",
-      year: 2020,
-      hours: 2100,
-      price: "€ 95.000",
-      location: "Herpt",
-      description: "Bijna nieuwe tractor met alle opties",
-      image: "/placeholder.svg",
-      marktplaatsUrl: "https://www.marktplaats.nl"
-    },
-    {
-      id: 5,
-      title: "Fendt 724 Vario",
-      year: 2017,
-      hours: 3800,
-      price: "€ 82.000",
-      location: "Herpt",
-      description: "Premium tractor met VarioDrive transmissie",
-      image: "/placeholder.svg",
-      marktplaatsUrl: "https://www.marktplaats.nl"
-    },
-    {
-      id: 6,
-      title: "Deutz-Fahr 6140",
-      year: 2019,
-      hours: 2800,
-      price: "€ 68.000",
-      location: "Herpt",
-      description: "Betrouwbare tractor met goede prestaties",
-      image: "/placeholder.svg",
-      marktplaatsUrl: "https://www.marktplaats.nl"
+  const { data: tractors, isLoading, error } = useQuery({
+    queryKey: ['tractors'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('tractors')
+        .select('*')
+        .eq('is_available', true)
+        .order('is_featured', { ascending: false })
+        .order('created_at', { ascending: false });
+      
+      if (error) {
+        console.error('Error fetching tractors:', error);
+        throw error;
+      }
+      
+      return data as Tractor[];
     }
-  ];
+  });
 
-  const handleTractorClick = (marktplaatsUrl: string) => {
-    window.open(marktplaatsUrl, '_blank');
+  const handleTractorClick = (marktplaatsUrl: string | null) => {
+    if (marktplaatsUrl) {
+      window.open(marktplaatsUrl, '_blank');
+    }
   };
+
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('nl-NL', {
+      style: 'currency',
+      currency: 'EUR',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(price);
+  };
+
+  if (isLoading) {
+    return (
+      <Layout>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-agri-green mx-auto mb-4"></div>
+            <p className="text-xl text-gray-600">Tractoren laden...</p>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
+
+  if (error) {
+    return (
+      <Layout>
+        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-xl text-red-600 mb-4">Er is een fout opgetreden bij het laden van de tractoren.</p>
+            <Button onClick={() => window.location.reload()}>
+              Probeer opnieuw
+            </Button>
+          </div>
+        </div>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>
@@ -97,63 +104,78 @@ const TractorenTeKoop = () => {
 
         {/* Tractors Grid */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {tractors.map((tractor) => (
-              <Card 
-                key={tractor.id} 
-                className="hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 bg-white border-2 border-gray-200 hover:border-agri-red"
-                onClick={() => handleTractorClick(tractor.marktplaatsUrl)}
-              >
-                <CardHeader className="p-0">
-                  <div className="relative">
-                    <img 
-                      src={tractor.image} 
-                      alt={tractor.title}
-                      className="w-full h-48 object-cover rounded-t-lg"
-                    />
-                    <div className="absolute top-4 right-4 bg-agri-red text-white px-3 py-1 rounded-full font-bold">
-                      {tractor.price}
+          {tractors && tractors.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {tractors.map((tractor) => (
+                <Card 
+                  key={tractor.id} 
+                  className="hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1 bg-white border-2 border-gray-200 hover:border-agri-red"
+                  onClick={() => handleTractorClick(tractor.marktplaats_url)}
+                >
+                  <CardHeader className="p-0">
+                    <div className="relative">
+                      <img 
+                        src={tractor.image_url || '/placeholder.svg'} 
+                        alt={tractor.title}
+                        className="w-full h-48 object-cover rounded-t-lg"
+                      />
+                      <div className="absolute top-4 right-4 bg-agri-red text-white px-3 py-1 rounded-full font-bold">
+                        {formatPrice(tractor.price)}
+                      </div>
+                      {tractor.is_featured && (
+                        <div className="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full font-bold text-sm">
+                          Uitgelicht
+                        </div>
+                      )}
                     </div>
-                  </div>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <CardTitle className="text-xl font-bold text-agri-green mb-3">
-                    {tractor.title}
-                  </CardTitle>
-                  
-                  <div className="space-y-2 mb-4">
-                    <div className="flex items-center text-gray-600">
-                      <Calendar className="h-4 w-4 mr-2 text-agri-red" />
-                      <span className="text-sm">Bouwjaar: {tractor.year}</span>
+                  </CardHeader>
+                  <CardContent className="p-6">
+                    <CardTitle className="text-xl font-bold text-agri-green mb-3">
+                      {tractor.title}
+                    </CardTitle>
+                    
+                    <div className="space-y-2 mb-4">
+                      <div className="flex items-center text-gray-600">
+                        <Calendar className="h-4 w-4 mr-2 text-agri-red" />
+                        <span className="text-sm">Bouwjaar: {tractor.year}</span>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <Wrench className="h-4 w-4 mr-2 text-agri-red" />
+                        <span className="text-sm">Draaiuren: {tractor.hours.toLocaleString('nl-NL')}</span>
+                      </div>
+                      <div className="flex items-center text-gray-600">
+                        <MapPin className="h-4 w-4 mr-2 text-agri-red" />
+                        <span className="text-sm">Locatie: {tractor.location}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center text-gray-600">
-                      <Wrench className="h-4 w-4 mr-2 text-agri-red" />
-                      <span className="text-sm">Draaiuren: {tractor.hours}</span>
-                    </div>
-                    <div className="flex items-center text-gray-600">
-                      <MapPin className="h-4 w-4 mr-2 text-agri-red" />
-                      <span className="text-sm">Locatie: {tractor.location}</span>
-                    </div>
-                  </div>
 
-                  <p className="text-gray-700 mb-4 text-sm leading-relaxed">
-                    {tractor.description}
-                  </p>
+                    {tractor.description && (
+                      <p className="text-gray-700 mb-4 text-sm leading-relaxed">
+                        {tractor.description}
+                      </p>
+                    )}
 
-                  <Button 
-                    className="w-full bg-agri-red hover:bg-agri-red/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleTractorClick(tractor.marktplaatsUrl);
-                    }}
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Bekijk op Marktplaats
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                    <Button 
+                      className="w-full bg-agri-red hover:bg-agri-red/90 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleTractorClick(tractor.marktplaats_url);
+                      }}
+                      disabled={!tractor.marktplaats_url}
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Bekijk op Marktplaats
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-16">
+              <p className="text-xl text-gray-600 mb-4">Momenteel geen tractoren beschikbaar.</p>
+              <p className="text-gray-500">Kom binnenkort terug voor nieuwe aanbiedingen!</p>
+            </div>
+          )}
         </div>
 
         {/* Contact Section */}

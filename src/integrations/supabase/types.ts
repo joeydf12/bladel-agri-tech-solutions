@@ -9,7 +9,60 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      tractors: {
+        Row: {
+          brand: string
+          created_at: string
+          description: string | null
+          hours: number
+          id: string
+          image_url: string | null
+          is_available: boolean | null
+          is_featured: boolean | null
+          location: string
+          marktplaats_url: string | null
+          model: string
+          price: number
+          title: string
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          brand: string
+          created_at?: string
+          description?: string | null
+          hours: number
+          id?: string
+          image_url?: string | null
+          is_available?: boolean | null
+          is_featured?: boolean | null
+          location?: string
+          marktplaats_url?: string | null
+          model: string
+          price: number
+          title: string
+          updated_at?: string
+          year: number
+        }
+        Update: {
+          brand?: string
+          created_at?: string
+          description?: string | null
+          hours?: number
+          id?: string
+          image_url?: string | null
+          is_available?: boolean | null
+          is_featured?: boolean | null
+          location?: string
+          marktplaats_url?: string | null
+          model?: string
+          price?: number
+          title?: string
+          updated_at?: string
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
