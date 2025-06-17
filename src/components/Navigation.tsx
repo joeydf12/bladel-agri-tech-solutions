@@ -1,7 +1,6 @@
-
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Tractor } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,10 +22,11 @@ const Navigation = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="relative">
-              <Tractor className="h-10 w-10 text-agri-red" />
-              <div className="absolute -top-1 -right-1 w-3 h-3 bg-agri-green rounded-full"></div>
-            </div>
+            <img
+              src="/images/logovofvbladel.png"
+              alt="VOF van Bladel Logo"
+              className="h-12 w-auto"
+            />
             <div>
               <span className="text-2xl font-bold text-agri-green">VOF van Bladel</span>
               <div className="text-xs text-gray-600 font-medium">Sinds 1983</div>
@@ -39,11 +39,10 @@ const Navigation = () => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`px-6 py-3 text-lg font-semibold rounded-lg transition-all duration-200 ${
-                  isActive(item.href)
-                    ? 'text-white bg-agri-red shadow-lg'
-                    : 'text-agri-green hover:text-agri-red hover:bg-gray-50'
-                }`}
+                className={`px-6 py-3 text-lg font-semibold rounded-lg transition-all duration-200 ${isActive(item.href)
+                  ? 'text-white bg-agri-red shadow-lg'
+                  : 'text-agri-green hover:text-agri-red hover:bg-gray-50'
+                  }`}
               >
                 {item.name}
               </Link>
@@ -70,11 +69,10 @@ const Navigation = () => {
                   key={item.name}
                   to={item.href}
                   onClick={() => setIsOpen(false)}
-                  className={`block px-4 py-3 text-lg font-semibold rounded-lg transition-colors duration-200 ${
-                    isActive(item.href)
-                      ? 'text-white bg-agri-red'
-                      : 'text-agri-green hover:text-agri-red hover:bg-white'
-                  }`}
+                  className={`block px-4 py-3 text-lg font-semibold rounded-lg transition-colors duration-200 ${isActive(item.href)
+                    ? 'text-white bg-agri-red'
+                    : 'text-agri-green hover:text-agri-red hover:bg-white'
+                    }`}
                 >
                   {item.name}
                 </Link>

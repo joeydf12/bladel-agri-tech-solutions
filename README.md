@@ -1,6 +1,14 @@
 
 # VOF van Bladel - Tractor Website 🚜
 
+[![React](https://img.shields.io/badge/React-18.3-blue?logo=react&logoColor=white)](https://reactjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Supabase](https://img.shields.io/badge/Supabase-2.50-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com/)
+
+
+
 **VOF van Bladel** is een React-applicatie voor het familiebedrijf VOF van Bladel, gespecialiseerd in tractoren en landbouwmachines sinds 1983. 
 
 De website biedt informatie over diensten, merken, tractoren te koop en contactgegevens. De applicatie maakt gebruik van **Supabase** voor het beheren van tractor advertenties en **Tailwind CSS** voor styling.
