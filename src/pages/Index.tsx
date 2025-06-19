@@ -24,13 +24,13 @@ const Index = () => {
       icon: <Wrench className="h-12 w-12" />,
       title: "Reparatie & Onderhoud",
       description: "Professionele reparatie en onderhoud van tractoren, landbouwmachines en tuinmachines",
-      image: "src/images/reparatie.jpg"
+      image: "../images/reparatie.jpg"
     },
     {
       icon: <Shield className="h-12 w-12" />,
       title: "APK-keuringen",
       description: "Erkende APK-keuringen voor auto's en bedrijfsvoertuigen",
-      image: "src/images/apk.jpg"
+      image: "../images/apk.jpg"
     },
     {
       icon: <Truck className="h-12 w-12" />,
@@ -42,7 +42,7 @@ const Index = () => {
       icon: <Award className="h-12 w-12" />,
       title: "Gebruikte Machines",
       description: "Verkoop van gebruikte tractoren en landbouwmachines via Marktplaats",
-      image: "src/images/ander.jpeg"
+      image: "../images/ander.jpeg"
     }
   ];
 
@@ -103,7 +103,7 @@ const Index = () => {
         <div className="absolute inset-0 bg-black opacity-40"></div>
         <div className="absolute inset-0">
           <img
-            src="src/images/homefoto.jpg"
+            src="../images/homefoto.jpg"
             alt="Tractor in het veld"
             className="w-full h-full object-cover"
           />
@@ -338,7 +338,7 @@ const Index = () => {
 
             <div className="relative">
               <img
-                src="src/images/homefoto.jpg"
+                src="../images/homefoto.jpg"
                 alt="Werkplaats VOF van Bladel"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

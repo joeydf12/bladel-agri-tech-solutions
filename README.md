@@ -13,7 +13,10 @@
 
 De website biedt informatie over diensten, merken, tractoren te koop en contactgegevens. De applicatie maakt gebruik van **Supabase** voor het beheren van tractor advertenties en **Tailwind CSS** voor styling.
 
-<img src="https://via.placeholder.com/800x400/c41e3a/ffffff?text=VOF+van+Bladel+Website" alt="project-image" />
+<img src="public/images/project1.png" alt="project-image1" />
+<img src="public/images/project2.png" alt="project-image2" />
+<img src="public/images/project3.png" alt="project-image3" />
+<img src="public/images/project4.png" alt="project-image4" />
 
 ---
 
