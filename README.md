@@ -217,4 +217,26 @@ Dit is een bedrijfswebsite voor VOF van Bladel. Voor wijzigingen of verbeteringe
 
 ## 📄 Licentie
 
-Dit project is eigendom van VOF van Bladel. Alle rechten voorbehouden.
+Dit project is eigendom van VOF van Bladel. Alle rechten voorbehouden. Het is niet toegestaan om de code of content van deze website te kopiëren, verspreiden of hergebruiken zonder expliciete schriftelijke toestemming van VOF van Bladel.
+
+
+## 📄 Veelgestelde Vragen (FAQ)
+ #### Kan ik de website bekijken zonder deze lokaal te installeren?
+ Je kunt dit momenteel via vercel bekijken.
+
+ ####  Waar komen de tractoradvertenties vandaan?
+ De tractoradvertenties worden beheerd via een Supabase database.
+
+ ####  Kan ik zelf een tractor toevoegen of bewerken?
+ Nee, deze publieke website heeft geen functionaliteit voor gebruikers om tractoren toe te voegen of te bewerken. Dit wordt intern beheerd door VOF van Bladel doormiddel van supabase.
+
+ #### Ik heb een vraag over een specifieke tractor, hoe kan ik contact opnemen?
+ Je kunt de contactgegevens vinden op de Contactpagina van de website, of direct contact opnemen via de telefoon of e-mail die vermeld staat in de bedrijfsinformatie.
+
+## 📄 Wijzigingslog (Changelog)
+#### Versie 1.0.0 - Initiële Lancering (Juni 2025)
+Eerste publieke release van de VOF van Bladel website.
+Implementatie van basispagina's: Home, Diensten, Merken, Tractoren te Koop, Contact.
+Integratie met Supabase voor dynamische tractoradvertenties.
+Responsief ontwerp met Tailwind CSS.
+Basis navigatie en footer componenten.
