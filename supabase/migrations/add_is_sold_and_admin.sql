@@ -43,12 +43,38 @@ INSERT INTO auth.users (
   ''
 );
 
--- Create admin role
-CREATE ROLE IF NOT EXISTS admin;
+-- Create admin role (if it doesn't exist, this will fail silently)
+DO $$
+BEGIN
+  IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'admin') THEN
+    CREATE ROLE admin;
+  END IF;
+END
+$$;
 
 -- Grant admin privileges
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO admin;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO admin;
 
 -- Assign admin role to the admin user
-GRANT admin TO authenticated; 
+GRANT admin TO authenticated;
+
+-- Add RLS policies for authenticated users to perform CRUD operations
+CREATE POLICY "Authenticated users can insert tractors" 
+  ON public.tractors 
+  FOR INSERT 
+  TO authenticated 
+  WITH CHECK (true);
+
+CREATE POLICY "Authenticated users can update tractors" 
+  ON public.tractors 
+  FOR UPDATE 
+  TO authenticated 
+  USING (true) 
+  WITH CHECK (true);
+
+CREATE POLICY "Authenticated users can delete tractors" 
+  ON public.tractors 
+  FOR DELETE 
+  TO authenticated 
+  USING (true); 
