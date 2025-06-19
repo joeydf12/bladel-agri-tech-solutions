@@ -1,6 +1,7 @@
-
 import { MapPin, Phone, Mail, Clock, Tractor, Award, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Button } from './ui/button';
+import { Lock } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -20,10 +21,10 @@ const Footer = () => {
               </div>
             </div>
             <p className="text-gray-300 mb-6 text-lg leading-relaxed">
-              Al meer dan 40 jaar uw betrouwbare partner voor tractoren, landbouwmachines 
+              Al meer dan 40 jaar uw betrouwbare partner voor tractoren, landbouwmachines
               en professioneel onderhoud. Gevestigd in Herpt, werkend voor de hele regio.
             </p>
-            
+
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="flex items-center space-x-2">
                 <Award className="h-5 w-5 text-agri-red" />
@@ -72,7 +73,7 @@ const Footer = () => {
           {/* Quick Links & Hours */}
           <div>
             <h3 className="text-xl font-bold mb-6 text-agri-red">Informatie</h3>
-            
+
             <div className="mb-6">
               <div className="flex items-center space-x-3 mb-3">
                 <Clock className="h-5 w-5 text-agri-red" />
@@ -113,6 +114,14 @@ const Footer = () => {
               <span>APK-keuringen</span>
               <span>24/7 service</span>
             </div>
+          </div>
+          <div className="flex justify-center mt-6">
+            <Link to="/admin">
+              <Button variant="secondary" size="sm" className="flex items-center gap-2">
+                <Lock className="w-4 h-4" />
+                Administrator login
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
